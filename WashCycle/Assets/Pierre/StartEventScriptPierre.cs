@@ -9,6 +9,8 @@ public class StartEventScriptPierre : MonoBehaviour
 
     public GameObject progressbar;
     public bool isBroken = true;
+    public GameManager gm;
+    public double fixValue;
 
     Collider thisTrigger;
     // Start is called before the first frame update
@@ -20,6 +22,7 @@ public class StartEventScriptPierre : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //We can probably move this to a function after it's fixed so we don't call it every frame
         CheckIfFixed();
     }
 
@@ -45,6 +48,7 @@ public class StartEventScriptPierre : MonoBehaviour
     public void FixMachine()
     {
         isBroken = false;
+        gm.UpdateMoney(fixValue);
     }
 
     private void CheckIfFixed() { 

@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] UnityEvent onInputTimerEnd;
 
     float timer;
+    private bool isEnded = false;
 
     // Update is called once per frame
     void Update()
@@ -28,14 +29,17 @@ public class InputManager : MonoBehaviour
         }else if (Input.GetKeyUp(KeyCode.E))
         {
             onInputCancel.Invoke();
+            isEnded = false;
         }
-        else if (Input.GetKey(KeyCode.E))
+        else if (Input.GetKey(KeyCode.E) && isEnded == false)
         {
             timer += Time.deltaTime;
             onInputTimerUpdate.Invoke(timerUpdateCurve.Evaluate(Mathf.InverseLerp(0, timeToComplete, timer)));
             if (timer > timeToComplete)
             {
+                isEnded = true;
                 onInputTimerEnd.Invoke();
+                
             }
         }
 

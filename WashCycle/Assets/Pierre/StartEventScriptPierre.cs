@@ -76,6 +76,7 @@ public class StartEventScriptPierre : MonoBehaviour
             gm.UpdateMoney(-arcadeCost);
             //TODO decrease stress by stressReliefAmount
             Debug.Log("reduced stress by " + stressReliefAmount);
+            gm.ReduceStress(stressReliefAmount);
             CheckIfFixed();
             }
         }
@@ -99,6 +100,7 @@ public class StartEventScriptPierre : MonoBehaviour
                 //TODO increase stress amount by stressAmount
                 Debug.Log("Stress just increased by " + stressAmount);
                 timer = timer - timePerStressTick;
+                gm.UpdateStress(stressAmount);
             }
 
         }

@@ -17,7 +17,7 @@ public class characterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.frameCount % 1 != 0) return;
+        //if (Time.frameCount % 1 != 0) return;
         var translation = Input.GetAxis("Vertical") * speed;
         var strafe = Input.GetAxis("Horizontal") * speed;
         translation *= Time.deltaTime;

@@ -14,53 +14,50 @@ public class StartEventScriptPierre : MonoBehaviour
     public double arcadeCost;
     public float stressAmount;
     public float stressReliefAmount;
-    [SerializeField] float timePerStressTick = 1f;
-    private float timer = 0f;
+    [SerializeField] private float timePerStressTick = 1f;
+    private float _timer = 0f;
 
-    Collider thisTrigger;
+    private Collider _thisTrigger;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        thisTrigger = GetComponent<BoxCollider>();
+        _thisTrigger = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         IncreaseStress();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (!other.CompareTag("Player")) return;
+        if (isBroken == true)
         {
-            if (isBroken == true)
-            {
-                string text = "Hold@E@To Fix";
-                readyText.text = text.Replace("@", System.Environment.NewLine);
-                progressbar.SetActive(true);
-            }
-            if (!isBroken && gm.moneyAmount >= arcadeCost)
-            {
-                string text = "Hold@E@To Play";
-                readyText.text = text.Replace("@", System.Environment.NewLine);
-                progressbar.SetActive(true);
-            }
-            if (!isBroken && gm.moneyAmount < arcadeCost)
-            {
-                string text = "Too Broke@For Fun";
-                readyText.text = text.Replace("@", System.Environment.NewLine);
-            }
+            const string text = "Hold@E@To Fix";
+            readyText.text = text.Replace("@", System.Environment.NewLine);
+            progressbar.SetActive(true);
+        }
+        if (!isBroken && gm.moneyAmount >= arcadeCost)
+        {
+            const string text = "Hold@E@To Play";
+            readyText.text = text.Replace("@", System.Environment.NewLine);
+            progressbar.SetActive(true);
+        }
+
+        if (isBroken || !(gm.moneyAmount < arcadeCost)) return;
+        {
+            const string text = "Too Broke@For Fun";
+            readyText.text = text.Replace("@", System.Environment.NewLine);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            readyText.text = "";
-            progressbar.SetActive(false);
-        }
+        if (!other.CompareTag("Player")) return;
+        readyText.text = "";
+        progressbar.SetActive(false);
     }
     
     public void interactMachine()
@@ -72,50 +69,43 @@ public class StartEventScriptPierre : MonoBehaviour
         }
         else if (!isBroken)
         {
-            if (gm.moneyAmount >= arcadeCost) { 
-                gm.UpdateMoney(-arcadeCost);
-                gm.ReduceStress(stressReliefAmount);
-                checkMoney();
-            }
+            if (!(gm.moneyAmount >= arcadeCost)) return;
+            gm.UpdateMoney(-arcadeCost);
+            gm.ReduceStress(stressReliefAmount);
+            checkMoney();
         }
     }
 
     private void CheckIfFixed() { 
-    if (!isBroken && gm.moneyAmount >= arcadeCost) {
-            string text = "Hold@E@To Play";
-            readyText.text = text.Replace("@", System.Environment.NewLine);
-        }
-    if (!isBroken && gm.moneyAmount < arcadeCost)
-        {
-            string text = "Too Broke@For Fun";
-            readyText.text = text.Replace("@", System.Environment.NewLine);
-        }
+    if (!isBroken && gm.moneyAmount >= arcadeCost)
+    {
+        const string text = "Hold@E@To Play";
+        readyText.text = text.Replace("@", System.Environment.NewLine);
+    }
+    else if (!isBroken && gm.moneyAmount < arcadeCost)
+    {
+        const string text = "Too Broke@For Fun";
+        readyText.text = text.Replace("@", System.Environment.NewLine);
+    }
     }
 
     private void checkMoney()
     {
-        Debug.Log("check money");
-        if (gm.moneyAmount < arcadeCost)
-        {
-            string text = "Too Broke@For Fun";
-            readyText.text = text.Replace("@", System.Environment.NewLine);
-        }
+        //Debug.Log("check money");
+        if (!(gm.moneyAmount < arcadeCost)) return;
+        const string text = "Too Broke@For Fun";
+        readyText.text = text.Replace("@", System.Environment.NewLine);
     }
 
     private void IncreaseStress()
     {
-        if (isBroken)
-        {
-            //TurnOnSmokeAndMakeMachineRedFunction();
-            timer += Time.deltaTime;
+        if (!isBroken) return;
+        //TurnOnSmokeAndMakeMachineRedFunction();
+        _timer += Time.deltaTime;
 
-            if (timer > timePerStressTick)
-            {
-                timer = timer - timePerStressTick;
-                gm.UpdateStress(stressAmount);
-            }
-
-        }
+        if (!(_timer > timePerStressTick)) return;
+        _timer = _timer - timePerStressTick;
+        gm.UpdateStress(stressAmount);
     }
 
 }

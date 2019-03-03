@@ -9,33 +9,29 @@ public class StartEventScript : MonoBehaviour
 
     public GameObject progressbar;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            readyText.text = "E";
-            progressbar.SetActive(true);
-        }
+        if (!other.CompareTag("Player")) return;
+        readyText.text = "E";
+        progressbar.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            readyText.text = "";
-            progressbar.SetActive(false);
-        }
+        if (!other.CompareTag("Player")) return;
+        readyText.text = "";
+        progressbar.SetActive(false);
     }
     
     

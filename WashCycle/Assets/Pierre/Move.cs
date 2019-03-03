@@ -7,25 +7,30 @@ public class Move : StateMachineBehaviour
     GameObject NPC;
     public GameObject[] goal;
     UnityEngine.AI.NavMeshAgent agent;
-    private int assignedNumber;
     private Animator thisAnimator;
+    private int myNumber;
+    AssignmentHandler assignmentScript;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         NPC = animator.gameObject;
         agent = NPC.GetComponent<UnityEngine.AI.NavMeshAgent>();
-        agent.SetDestination(goal[0].transform.position); //0 will be assignedNumber
         thisAnimator = NPC.GetComponent<Animator>();
-
+        assignmentScript = NPC.GetComponent<AssignmentHandler>();
+        myNumber = assignmentScript.GetAssignedNumber();
+   
+        
 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        agent.SetDestination(goal[myNumber].transform.position); //0 will be assignedNumber
+
         //CHECK IF WE'RE AT GOAL POSITION THEN TRANSITION STATE 
-        if (Vector3.Distance(goal[0].transform.position, NPC.transform.position) < 3.0f)
+        if (Vector3.Distance(goal[myNumber].transform.position, NPC.transform.position) < 3.0f)
         {
             //Change State
             thisAnimator.SetBool("atDestination", true); 
@@ -33,8 +38,5 @@ public class Move : StateMachineBehaviour
     }
     
 
-    public void setAssignedNumber(int assignment)
-    {
-        assignedNumber = assignment;
-    }
+    
 }

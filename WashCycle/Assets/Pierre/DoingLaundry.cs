@@ -10,12 +10,17 @@ public class DoingLaundry : StateMachineBehaviour
     private float timer = 0f;
     private int checksPerformed;
     private Animator thisAnimator;
+    private int myNumber;
+    AssignmentHandler assignmentScript;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         NPC = animator.gameObject;
         thisAnimator = NPC.GetComponent<Animator>();
+        assignmentScript = NPC.GetComponent<AssignmentHandler>();
+        myNumber = assignmentScript.GetAssignedNumber();
+
         Debug.Log("I'm doing laundry");    
     }
 
@@ -27,7 +32,7 @@ public class DoingLaundry : StateMachineBehaviour
 
         if (timer > timePerCheck)
         {
-            Debug.Log("Preform Break Check"); //TODO do break checks
+            Debug.Log("Preform Break Check for machine " + myNumber); //TODO do break checks
             checksPerformed++;
             timer = timer - timePerCheck;
             

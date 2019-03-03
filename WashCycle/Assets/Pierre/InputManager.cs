@@ -10,34 +10,37 @@ public class InputManager : MonoBehaviour
     public class FloatEvent : UnityEvent<float> { }
 
     public float timeToComplete = 2;
-    [SerializeField] private UnityEvent onInput;
-    [SerializeField] private UnityEvent onInputCancel;
-    [SerializeField] private AnimationCurve timerUpdateCurve;
-    [SerializeField] private FloatEvent onInputTimerUpdate;
-    [SerializeField] private UnityEvent onInputTimerEnd;
+    [SerializeField] UnityEvent onInput;
+    [SerializeField] UnityEvent onInputCancel;
+    [SerializeField] AnimationCurve timerUpdateCurve;
+    [SerializeField] FloatEvent onInputTimerUpdate;
+    [SerializeField] UnityEvent onInputTimerEnd;
 
-    private float _timer;
-    private bool _isEnded = false;
+    float timer;
+    private bool isEnded = false;
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            _timer = 0;
+            timer = 0;
             onInput.Invoke();
         }else if (Input.GetKeyUp(KeyCode.E))
         {
             onInputCancel.Invoke();
-            _isEnded = false;
+            isEnded = false;
         }
-        else if (Input.GetKey(KeyCode.E) && _isEnded == false)
+        else if (Input.GetKey(KeyCode.E) && isEnded == false)
         {
-            _timer += Time.deltaTime;
-            onInputTimerUpdate.Invoke(timerUpdateCurve.Evaluate(Mathf.InverseLerp(0, timeToComplete, _timer)));
-            if (!(_timer > timeToComplete)) return;
-            _isEnded = true;
-            onInputTimerEnd.Invoke();
+            timer += Time.deltaTime;
+            onInputTimerUpdate.Invoke(timerUpdateCurve.Evaluate(Mathf.InverseLerp(0, timeToComplete, timer)));
+            if (timer > timeToComplete)
+            {
+                isEnded = true;
+                onInputTimerEnd.Invoke();
+                
+            }
         }
 
     }

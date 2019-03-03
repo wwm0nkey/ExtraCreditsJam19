@@ -5,17 +5,17 @@ using UnityEngine;
 public class characterController : MonoBehaviour
 {
     public float speed = 10.0F;
-    public camMouseLook mouseLook;
-    private bool _camDisabled = false;
+    public camMouseLook mouselook;
+    private bool camDisabled = false;
 
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
         //if (Time.frameCount % 1 != 0) return;
         var translation = Input.GetAxis("Vertical") * speed;
@@ -25,17 +25,17 @@ public class characterController : MonoBehaviour
 
         transform.Translate(strafe, 0, translation);
 
-        if (Input.GetKeyDown("escape") && _camDisabled == false)
+        if (Input.GetKeyDown("escape") && camDisabled == false)
         {
             Cursor.lockState = CursorLockMode.None;
-            mouseLook.sensitivity = 0;
-            _camDisabled = true;
+            mouselook.sensitivity = 0;
+            camDisabled = true;
         }
-        else if (Input.GetKeyDown("escape") && _camDisabled == true)
+        else if (Input.GetKeyDown("escape") && camDisabled == true)
         {
             Cursor.lockState = CursorLockMode.Locked;
-            mouseLook.sensitivity = 1;
-            _camDisabled = false;
+            mouselook.sensitivity = 1;
+            camDisabled = false;
         }
     }
 }

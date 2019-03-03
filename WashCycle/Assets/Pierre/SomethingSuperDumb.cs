@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class MachineEvent: MonoBehaviour
+public class SomethingSuperDumb : MonoBehaviour
 {
     public TMP_Text readyText;
 
@@ -17,19 +17,11 @@ public class MachineEvent: MonoBehaviour
     private float timer = 0f;
 
     Collider thisTrigger;
-    InputManager inputManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        //readyText = GameObject.Find("Press E").GetComponent<TMP_Text>();
-        //progressbar = GameObject.Find("Action Progress");
-        //gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-
         thisTrigger = GetComponent<BoxCollider>();
-        inputManager = GetComponent<InputManager>();
-        inputManager.enabled = false;
         thisTrigger.enabled = false;
         isBroken = false;
     }
@@ -48,7 +40,6 @@ public class MachineEvent: MonoBehaviour
             {
                 string text = "Hold@E@To Fix";
                 readyText.text = text.Replace("@", System.Environment.NewLine);
-                inputManager.enabled = true;
                 progressbar.SetActive(true);
             }
         }
@@ -59,26 +50,27 @@ public class MachineEvent: MonoBehaviour
         if (other.tag == "Player")
         {
             readyText.text = "";
-            inputManager.enabled = false;
             progressbar.SetActive(false);
         }
     }
-    
+
     public void interactMachine()
     {
-        if (isBroken) { 
+        if (isBroken)
+        {
             isBroken = false;
             gm.UpdateMoney(fixValue);
             CheckIfFixed();
         }
     }
 
-    private void CheckIfFixed() { 
-    if (!isBroken) {
+    private void CheckIfFixed()
+    {
+        if (!isBroken)
+        {
             readyText.text = "";
             progressbar.SetActive(false);
             thisTrigger.enabled = false;
-            inputManager.enabled = false;
         }
     }
 
@@ -91,15 +83,15 @@ public class MachineEvent: MonoBehaviour
         Debug.Log("This Machine Broke! :C");
     }
 
-   // private void checkMoney()
-   // {
-   //     Debug.Log("check money");
-   //     if (gm.moneyAmount < instantRepairCost)
-   //     {
-   //         string text = "Not Enough Money";
-   //         readyText.text = text.Replace("@", System.Environment.NewLine);
-   //     }
-   // }
+    // private void checkMoney()
+    // {
+    //     Debug.Log("check money");
+    //     if (gm.moneyAmount < instantRepairCost)
+    //     {
+    //         string text = "Not Enough Money";
+    //         readyText.text = text.Replace("@", System.Environment.NewLine);
+    //     }
+    // }
 
     private void IncreaseStress()
     {
@@ -116,5 +108,4 @@ public class MachineEvent: MonoBehaviour
 
         }
     }
-
 }

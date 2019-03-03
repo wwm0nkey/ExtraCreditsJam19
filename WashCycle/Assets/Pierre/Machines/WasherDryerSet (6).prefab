@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7644100130582928169}
   - component: {fileID: 5425701269743547905}
-  - component: {fileID: 1793893089466309453}
+  - component: {fileID: 5594778068930015086}
   m_Layer: 0
   m_Name: WasherDryerSet (6)
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.532264, y: 1.720527, z: 2.206491}
   m_Center: {x: -0.01453722, y: 0.8193209, z: -0.8406897}
---- !u!114 &1793893089466309453
+--- !u!114 &5594778068930015086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,10 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b1fc77306e13984fade24df3c21e6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  readyText: {fileID: 0}
-  progressbar: {fileID: 0}
-  isBroken: 1
-  gm: {fileID: 0}
+  isBroken: 0
   fixValue: 75
   instantRepairCost: 50
   stressAmount: 3

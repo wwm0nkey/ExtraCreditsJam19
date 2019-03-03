@@ -7,7 +7,7 @@ public class DoingLaundry : StateMachineBehaviour
     GameObject NPC;
     [SerializeField] float timePerCheck = 30f;
     [SerializeField] int checksToPerform = 4;
-    public GameObject[] machines;
+    private GameObject[] machines;
     private float timer = 0f;
     private int checksPerformed;
     private Animator thisAnimator;
@@ -18,6 +18,7 @@ public class DoingLaundry : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        machines = GameObject.FindGameObjectsWithTag("Machine");
         NPC = animator.gameObject;
         thisAnimator = NPC.GetComponent<Animator>();
         assignmentScript = NPC.GetComponent<AssignmentHandler>();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class StartEventScriptPierre : MonoBehaviour
+public class ArcadeEvent: MonoBehaviour
 {
     public TMP_Text readyText;
 

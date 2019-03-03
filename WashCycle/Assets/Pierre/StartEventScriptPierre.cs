@@ -73,19 +73,32 @@ public class StartEventScriptPierre : MonoBehaviour
         else if (!isBroken)
         {
             if (gm.moneyAmount >= arcadeCost) { 
-            gm.UpdateMoney(-arcadeCost);
-            //TODO decrease stress by stressReliefAmount
-            Debug.Log("reduced stress by " + stressReliefAmount);
-            gm.ReduceStress(stressReliefAmount);
-            CheckIfFixed();
+                gm.UpdateMoney(-arcadeCost);
+                gm.ReduceStress(stressReliefAmount);
+                checkMoney();
             }
         }
     }
 
     private void CheckIfFixed() { 
-    if (!isBroken) {
-            readyText.text = "";
-            progressbar.SetActive(false);
+    if (!isBroken && gm.moneyAmount >= arcadeCost) {
+            string text = "Hold@E@To Play";
+            readyText.text = text.Replace("@", System.Environment.NewLine);
+        }
+    if (!isBroken && gm.moneyAmount < arcadeCost)
+        {
+            string text = "Too Broke@For Fun";
+            readyText.text = text.Replace("@", System.Environment.NewLine);
+        }
+    }
+
+    private void checkMoney()
+    {
+        Debug.Log("check money");
+        if (gm.moneyAmount < arcadeCost)
+        {
+            string text = "Too Broke@For Fun";
+            readyText.text = text.Replace("@", System.Environment.NewLine);
         }
     }
 
@@ -93,12 +106,11 @@ public class StartEventScriptPierre : MonoBehaviour
     {
         if (isBroken)
         {
+            //TurnOnSmokeAndMakeMachineRedFunction();
             timer += Time.deltaTime;
 
             if (timer > timePerStressTick)
             {
-                //TODO increase stress amount by stressAmount
-                Debug.Log("Stress just increased by " + stressAmount);
                 timer = timer - timePerStressTick;
                 gm.UpdateStress(stressAmount);
             }

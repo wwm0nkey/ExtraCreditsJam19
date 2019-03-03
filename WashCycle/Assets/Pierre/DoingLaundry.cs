@@ -7,11 +7,13 @@ public class DoingLaundry : StateMachineBehaviour
     GameObject NPC;
     [SerializeField] float timePerCheck = 30f;
     [SerializeField] int checksToPerform = 4;
+    public GameObject[] machines;
     private float timer = 0f;
     private int checksPerformed;
     private Animator thisAnimator;
     private int myNumber;
     AssignmentHandler assignmentScript;
+    MachineEvent machineScript;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,6 +22,9 @@ public class DoingLaundry : StateMachineBehaviour
         thisAnimator = NPC.GetComponent<Animator>();
         assignmentScript = NPC.GetComponent<AssignmentHandler>();
         myNumber = assignmentScript.GetAssignedNumber();
+
+        machineScript = machines[myNumber].GetComponent<MachineEvent>();
+
 
         Debug.Log("I'm doing laundry");    
     }
@@ -32,7 +37,9 @@ public class DoingLaundry : StateMachineBehaviour
 
         if (timer > timePerCheck)
         {
-            Debug.Log("Preform Break Check for machine " + myNumber); //TODO do break checks
+            //MAKE CHECK AND IF CHECK IS SUCCESSFUL THEN RUN THIS FUNCTION
+            machineScript.Break();
+            //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             checksPerformed++;
             timer = timer - timePerCheck;
             
@@ -44,5 +51,7 @@ public class DoingLaundry : StateMachineBehaviour
         }
 
     }
+
+    
     
 }

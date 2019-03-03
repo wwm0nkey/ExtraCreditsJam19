@@ -8,7 +8,7 @@ public class MachineEvent: MonoBehaviour
     public TMP_Text readyText;
 
     public GameObject progressbar;
-    public bool isBroken = false;
+    [SerializeField] bool isBroken;
     public GameManager gm;
     public double fixValue;
     public double instantRepairCost;
@@ -17,10 +17,13 @@ public class MachineEvent: MonoBehaviour
     private float timer = 0f;
 
     Collider thisTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
         thisTrigger = GetComponent<BoxCollider>();
+        thisTrigger.enabled = false;
+        isBroken = false;
     }
 
     // Update is called once per frame
@@ -70,8 +73,11 @@ public class MachineEvent: MonoBehaviour
 
     public void Break()
     {
+        //********* THIS IS NOT SETTING BROKEN TO TRUE
         isBroken = true;
+        thisTrigger = GetComponent<BoxCollider>();
         thisTrigger.enabled = true;
+        Debug.Log("This Machine Broke! :C");
     }
 
    // private void checkMoney()

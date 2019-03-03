@@ -14,13 +14,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: laundryDone
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -85,6 +85,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timePerCheck: 2
   checksToPerform: 4
+  machines:
+  - {fileID: 6767852288712543457, guid: 408ddcf63cdef824e94075521ea8e8b4, type: 3}
+  - {fileID: 1269514759189553054, guid: 4b0fac080ed32f644901a0ef41d59334, type: 3}
+  - {fileID: 7309109609573623126, guid: bf6e234b615a5214081c1e1cd35fea39, type: 3}
+  - {fileID: 7789866626280322773, guid: 81febe8beb5ad384fa5108e11b4d107c, type: 3}
+  - {fileID: 689240003667209390, guid: 3d08eae1f635a424297066d058c3acd8, type: 3}
+  - {fileID: 4222398395322117462, guid: 299e8f292a142a747bdc6b1f1e3820f8, type: 3}
+  - {fileID: 4950233797108479827, guid: c9e23baa1147610429b978745dcc8ed9, type: 3}
+  - {fileID: 3841815836867424259, guid: fd6f14d25dd383a47b17ad262668606f, type: 3}
+  - {fileID: 8358375523373151229, guid: b9220befd023ee24597295899fe6ae0f, type: 3}
+  - {fileID: 8301654583268342933, guid: bf27c4511dc7ce04fa00900b3c6f59c8, type: 3}
 --- !u!1101 &1101145214721774050
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d1ffcc9-1719-488b-828b-e4f7027bf4a2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WashCycle/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WashCycle/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WashCycle/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WashCycle/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NewShaderVariants.shadervariants" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/NewShaderVariants.shadervariants" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Pierre/NavigationAITesting.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Pierre/NavigationAITesting.unity" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -120,8 +115,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/William/Randomizer.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+            <state relative-caret-position="310">
+              <caret line="45" column="5" lean-forward="true" selection-start-line="31" selection-start-column="3" selection-end-line="45" selection-end-column="5" />
               <folding>
                 <marker date="1551665880375" expanded="false" signature="6:78" ph="..." />
                 <marker date="1551665880375" expanded="true" signature="119:1273" ph="{...}" />
@@ -314,7 +309,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8793000" />
+    <option name="totallyTimeSpent" value="9167000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -466,8 +461,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/William/Randomizer.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        <state relative-caret-position="310">
+          <caret line="45" column="5" lean-forward="true" selection-start-line="31" selection-start-column="3" selection-end-line="45" selection-end-column="5" />
           <folding>
             <marker date="1551665880375" expanded="false" signature="6:78" ph="..." />
             <marker date="1551665880375" expanded="true" signature="119:1273" ph="{...}" />

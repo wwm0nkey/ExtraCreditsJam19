@@ -7,6 +7,7 @@ public class MachineEvent: MonoBehaviour
 {
     public TMP_Text readyText;
 
+    public GameObject smoke;
     public GameObject progressbar;
     [SerializeField] bool isBroken;
     public GameManager gm;
@@ -32,8 +33,6 @@ public class MachineEvent: MonoBehaviour
         //readyText = GameObject.Find("Press E").GetComponent<TMP_Text>();
         //progressbar = GameObject.Find("Action Progress");
         //gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-
         thisTrigger = GetComponent<BoxCollider>();
         inputManager = GetComponent<InputManager>();
         inputManager.enabled = false;
@@ -119,6 +118,7 @@ public class MachineEvent: MonoBehaviour
             progressbar.SetActive(false);
             thisTrigger.enabled = false;
             inputManager.enabled = false;
+            smoke.SetActive(false);
         }
     }
 
@@ -126,6 +126,7 @@ public class MachineEvent: MonoBehaviour
     {
         //********* THIS IS NOT SETTING BROKEN TO TRUE
         isBroken = true;
+        smoke.SetActive(true);
         Debug.Log("This Machine Broke! :C");
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class GameManager : MonoBehaviour
     {
         stressAmount += stressAmt;
         stressText.text = stressAmount.ToString();
+        if (stressAmount >= 100)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
     public void ReduceStress(float stressAmt)
     {

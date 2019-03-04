@@ -20,6 +20,7 @@
           <e p="Move.cs" t="Include" />
           <e p="NPCDestroy.cs" t="Include" />
           <e p="SomethingSuperDumb.cs" t="Include" />
+          <e p="SpawnHandler.cs" t="Include" />
         </e>
         <e p="Scripts" t="Include">
           <e p="GameManager.cs" t="Include" />
@@ -104,6 +105,7 @@
         <e p="William" t="Include">
           <e p="MainMenuScript.cs" t="Include" />
           <e p="Randomizer.cs" t="Include" />
+          <e p="SpehereTest.cs" t="Include" />
           <e p="StartEventScript.cs" t="Include" />
         </e>
       </e>

@@ -102,6 +102,7 @@
           </e>
         </e>
         <e p="William" t="Include">
+          <e p="MainMenuScript.cs" t="Include" />
           <e p="Randomizer.cs" t="Include" />
           <e p="StartEventScript.cs" t="Include" />
         </e>

@@ -19,6 +19,13 @@ public class MachineEvent: MonoBehaviour
     Collider thisTrigger;
     InputManager inputManager;
 
+    GameObject NPC;
+    Animator npcAnimator;
+    [SerializeField] float timePerCheck = 30f;
+    [SerializeField] int checksToPerform = 4;
+    private int checksPerformed;
+    private bool npcIsHere = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +45,10 @@ public class MachineEvent: MonoBehaviour
     void Update()
     {
         IncreaseStress();
+        if (npcIsHere)
+        {
+            DoingLaundry();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,6 +63,16 @@ public class MachineEvent: MonoBehaviour
                 progressbar.SetActive(true);
             }
         }
+
+        if(other.tag == "NPC")
+        {
+            Debug.Log("NPC IS HERE");
+            NPC = other.gameObject;
+            npcAnimator = NPC.GetComponent<Animator>();
+
+            npcIsHere = true;
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -89,6 +110,26 @@ public class MachineEvent: MonoBehaviour
         thisTrigger = GetComponent<BoxCollider>();
         thisTrigger.enabled = true;
         Debug.Log("This Machine Broke! :C");
+    }
+
+    private void DoingLaundry()
+    {
+        timer += Time.deltaTime;
+
+        if (timer > timePerCheck)
+        {
+            //MAKE CHECK AND IF CHECK IS SUCCESSFUL THEN RUN THIS FUNCTION
+            Break();
+            //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            checksPerformed++;
+            timer = timer - timePerCheck;
+
+        }
+
+        if (checksPerformed == checksToPerform)
+        {
+            npcAnimator.SetBool("laundryDone", true);
+        }
     }
 
    // private void checkMoney()

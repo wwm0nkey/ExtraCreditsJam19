@@ -29,30 +29,5 @@ public class DoingLaundry : StateMachineBehaviour
 
         Debug.Log("I'm doing laundry");    
     }
-
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        //wait certain amount of time
-        timer += Time.deltaTime;
-
-        if (timer > timePerCheck)
-        {
-            //MAKE CHECK AND IF CHECK IS SUCCESSFUL THEN RUN THIS FUNCTION
-            machineScript.Break();
-            //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            checksPerformed++;
-            timer = timer - timePerCheck;
-            
-        }
-        
-        if(checksPerformed == checksToPerform)
-        {
-            thisAnimator.SetBool("laundryDone", true);
-        }
-
-    }
-
-    
     
 }

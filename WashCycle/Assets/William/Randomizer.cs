@@ -8,6 +8,8 @@ public class Randomizer : MonoBehaviour
 
     public List<GameObject> inPlay;
 
+    private Animator npcAnimator;
+
     public int minWaitTime;
     public int maxWaitTime;
 
@@ -34,23 +36,26 @@ public class Randomizer : MonoBehaviour
             timer = 0;
             randomTimer = Random.Range(minWaitTime, maxWaitTime);
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            RemoveNPC();
-        }
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    RemoveNPC();
+        //}
     }
 
     public void RemoveNPC()
     {
         randomNumber = Random.Range(0, npcList.Count);
         inPlay.Add(npcList[randomNumber]);
+        
         npcList[randomNumber].SetActive(true);
         npcList.RemoveAt(randomNumber);
-        
+
     }
 
     public void AddNPC(GameObject npc)
     {
+        npcAnimator = npc.GetComponent<Animator>();
+        npcAnimator.SetBool("isActive", false);
         npc.SetActive(false);
         inPlay.Remove(npc);
         npcList.Add(npc);

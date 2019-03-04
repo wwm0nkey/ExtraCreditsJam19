@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCDestroy : MonoBehaviour
+public class SpawnHandler : MonoBehaviour
 {
-    public GameObject spawn;
-    public Randomizer gm;
     GameObject NPC;
     private int usedNumber;
     AssignmentHandler assignmentScript;
@@ -16,10 +14,9 @@ public class NPCDestroy : MonoBehaviour
         if (other.tag == "NPC")
         {
             NPC = other.gameObject;
-            NPC.transform.position = new Vector3(spawn.transform.position.x, spawn.transform.position.y, spawn.transform.position.z);
             npcAnimator = NPC.GetComponent<Animator>();
-            npcAnimator.SetBool("isActive", false);
-            gm.AddNPC(NPC);
+            npcAnimator.SetBool("isActive", true);
+
         }
     }
 }

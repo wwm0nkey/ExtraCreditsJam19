@@ -124,10 +124,23 @@ public class MachineEvent: MonoBehaviour
 
     public void Break()
     {
-        //********* THIS IS NOT SETTING BROKEN TO TRUE
-        isBroken = true;
-        smoke.SetActive(true);
-        Debug.Log("This Machine Broke! :C");
+        var randomNum = 0;
+        var checks = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            randomNum = Random.Range(1, 4);
+            if (randomNum == 2 || randomNum == 4)
+            {
+                checks++;
+            }
+        }
+
+        if (checks >= 2)
+        {
+            isBroken = true;
+            smoke.SetActive(true);
+            Debug.Log("This Machine Broke! :C");
+        }
     }
 
     private void DoingLaundry()

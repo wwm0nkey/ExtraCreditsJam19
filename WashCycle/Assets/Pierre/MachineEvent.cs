@@ -14,8 +14,8 @@ public class MachineEvent: MonoBehaviour
     public double instantRepairCost;
     public float stressAmount;
     [SerializeField] float timePerStressTick = 1f;
-    private float timer = 0f;
-
+    [SerializeField] float timer = 0f;
+    [SerializeField] float npcTimer = 0f;
     Collider thisTrigger;
     InputManager inputManager;
 
@@ -23,8 +23,8 @@ public class MachineEvent: MonoBehaviour
     Animator npcAnimator;
     [SerializeField] float timePerCheck = 30f;
     [SerializeField] int checksToPerform = 4;
-    private int checksPerformed;
-    private bool npcIsHere = false;
+    [SerializeField] int checksPerformed;
+    [SerializeField] bool npcIsHere = false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +37,6 @@ public class MachineEvent: MonoBehaviour
         thisTrigger = GetComponent<BoxCollider>();
         inputManager = GetComponent<InputManager>();
         inputManager.enabled = false;
-        thisTrigger.enabled = false;
         isBroken = false;
     }
 
@@ -47,7 +46,20 @@ public class MachineEvent: MonoBehaviour
         IncreaseStress();
         if (npcIsHere)
         {
-            DoingLaundry();
+            npcTimer += Time.deltaTime;
+            if (npcTimer > timePerCheck)
+            {
+                //MAKE CHECK AND IF CHECK IS SUCCESSFUL THEN RUN THIS FUNCTION
+                Break();
+                //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                checksPerformed++;
+                npcTimer = npcTimer - timePerCheck;
+
+            }
+            if (checksPerformed == checksToPerform)
+            {
+                npcAnimator.SetBool("laundryDone", true);
+            }
         }
     }
 
@@ -57,6 +69,7 @@ public class MachineEvent: MonoBehaviour
         {
             if (isBroken == true)
             {
+                
                 string text = "Hold@E@To Fix";
                 readyText.text = text.Replace("@", System.Environment.NewLine);
                 inputManager.enabled = true;
@@ -64,11 +77,11 @@ public class MachineEvent: MonoBehaviour
             }
         }
 
-        if(other.tag == "NPC")
+        if (other.tag == "NPC")
         {
-            Debug.Log("NPC IS HERE");
             NPC = other.gameObject;
             npcAnimator = NPC.GetComponent<Animator>();
+            
 
             npcIsHere = true;
         }
@@ -82,6 +95,11 @@ public class MachineEvent: MonoBehaviour
             readyText.text = "";
             inputManager.enabled = false;
             progressbar.SetActive(false);
+        }
+        if (other.tag == "NPC")
+        {
+            npcIsHere = false;
+            npcTimer = 0;
         }
     }
     
@@ -107,25 +125,21 @@ public class MachineEvent: MonoBehaviour
     {
         //********* THIS IS NOT SETTING BROKEN TO TRUE
         isBroken = true;
-        thisTrigger = GetComponent<BoxCollider>();
-        thisTrigger.enabled = true;
         Debug.Log("This Machine Broke! :C");
     }
 
     private void DoingLaundry()
     {
         timer += Time.deltaTime;
-
         if (timer > timePerCheck)
         {
             //MAKE CHECK AND IF CHECK IS SUCCESSFUL THEN RUN THIS FUNCTION
             Break();
             //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             checksPerformed++;
-            timer = timer - timePerCheck;
+            timer = 0;
 
         }
-
         if (checksPerformed == checksToPerform)
         {
             npcAnimator.SetBool("laundryDone", true);

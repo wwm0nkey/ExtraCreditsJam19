@@ -27,6 +27,9 @@ public class MachineEvent: MonoBehaviour
     [SerializeField] int checksPerformed;
     [SerializeField] bool npcIsHere = false;
 
+    [SerializeField] AudioSource washClip;
+    [SerializeField] AudioSource breakClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,7 +83,8 @@ public class MachineEvent: MonoBehaviour
         {
             NPC = other.gameObject;
             npcAnimator = NPC.GetComponent<Animator>();
-            
+
+            washClip.Play();
 
             npcIsHere = true;
         }
@@ -100,23 +104,21 @@ public class MachineEvent: MonoBehaviour
             npcIsHere = false;
             npcTimer = 0;
             checksPerformed = 0;
+            washClip.Stop();
         }
     }
     
     public void interactMachine()
     {
-        if (isBroken) { 
             isBroken = false;
             gm.UpdateMoney(fixValue);
             CheckIfFixed();
-        }
     }
 
     private void CheckIfFixed() { 
     if (!isBroken) {
             readyText.text = "";
             progressbar.SetActive(false);
-            thisTrigger.enabled = false;
             inputManager.enabled = false;
             smoke.SetActive(false);
         }
@@ -129,7 +131,7 @@ public class MachineEvent: MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             randomNum = Random.Range(1, 4);
-            if (randomNum == 2 || randomNum == 4)
+            if (randomNum == 1)
             {
                 checks++;
             }
@@ -137,40 +139,15 @@ public class MachineEvent: MonoBehaviour
 
         if (checks >= 2)
         {
+            washClip.Stop();
+            breakClip.Play();
             isBroken = true;
             smoke.SetActive(true);
+            npcAnimator.SetBool("laundryDone", true);
             Debug.Log("This Machine Broke! :C");
         }
     }
-
-    private void DoingLaundry()
-    {
-        timer += Time.deltaTime;
-        if (timer > timePerCheck)
-        {
-            //MAKE CHECK AND IF CHECK IS SUCCESSFUL THEN RUN THIS FUNCTION
-            Break();
-            //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-            checksPerformed++;
-            timer = 0;
-
-        }
-        if (checksPerformed == checksToPerform)
-        {
-            npcAnimator.SetBool("laundryDone", true);
-        }
-    }
-
-   // private void checkMoney()
-   // {
-   //     Debug.Log("check money");
-   //     if (gm.moneyAmount < instantRepairCost)
-   //     {
-   //         string text = "Not Enough Money";
-   //         readyText.text = text.Replace("@", System.Environment.NewLine);
-   //     }
-   // }
-
+    
     private void IncreaseStress()
     {
         if (isBroken)

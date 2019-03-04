@@ -7,6 +7,7 @@ public class ArcadeEvent: MonoBehaviour
 {
     public TMP_Text readyText;
 
+    public GameObject smoke;
     public GameObject progressbar;
     public bool isBroken = true;
     public GameManager gm;
@@ -17,11 +18,16 @@ public class ArcadeEvent: MonoBehaviour
     [SerializeField] float timePerStressTick = 1f;
     private float timer = 0f;
 
+    InputManager inputManager;
+
     Collider thisTrigger;
     // Start is called before the first frame update
     void Start()
     {
         thisTrigger = GetComponent<BoxCollider>();
+
+        inputManager = GetComponent<InputManager>();
+        inputManager.enabled = false;
     }
 
     // Update is called once per frame
@@ -34,6 +40,7 @@ public class ArcadeEvent: MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            inputManager.enabled = true;
             if (isBroken == true)
             {
                 string text = "Hold@E@To Fix";
@@ -58,6 +65,7 @@ public class ArcadeEvent: MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            inputManager.enabled = false;
             readyText.text = "";
             progressbar.SetActive(false);
         }
@@ -68,6 +76,7 @@ public class ArcadeEvent: MonoBehaviour
         if (isBroken) { 
             isBroken = false;
             gm.UpdateMoney(fixValue);
+            smoke.SetActive(false);
             CheckIfFixed();
         }
         else if (!isBroken)
@@ -106,7 +115,7 @@ public class ArcadeEvent: MonoBehaviour
     {
         if (isBroken)
         {
-            //TurnOnSmokeAndMakeMachineRedFunction();
+            smoke.SetActive(true);
             timer += Time.deltaTime;
 
             if (timer > timePerStressTick)

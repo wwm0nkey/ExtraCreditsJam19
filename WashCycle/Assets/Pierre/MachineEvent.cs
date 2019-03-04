@@ -100,6 +100,7 @@ public class MachineEvent: MonoBehaviour
         {
             npcIsHere = false;
             npcTimer = 0;
+            checksPerformed = 0;
         }
     }
     

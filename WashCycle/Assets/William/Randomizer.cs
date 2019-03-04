@@ -8,21 +8,32 @@ public class Randomizer : MonoBehaviour
 
     public List<GameObject> inPlay;
 
-    public float minWaitTime;
-    public float maxWaitTime;
+    public int minWaitTime;
+    public int maxWaitTime;
 
     public float nextSpawnTime;
+    public float timer;
 
-    private int randomNumber;
+    public int randomTimer;
+    public int randomNumber;
     // Start is called before the first frame update
     void Start()
     {
         SetTimer();
+        randomTimer = Random.Range(minWaitTime, maxWaitTime);
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
+
+        if (timer > randomTimer)
+        {
+            RemoveNPC();
+            timer = 0;
+            randomTimer = Random.Range(minWaitTime, maxWaitTime);
+        }
         if (Input.GetKeyDown(KeyCode.F))
         {
             RemoveNPC();
@@ -50,13 +61,13 @@ public class Randomizer : MonoBehaviour
         this.nextSpawnTime = Random.Range(this.minWaitTime, this.maxWaitTime);
     }
 
-    public void CheckTimer()
-    {
-        this.nextSpawnTime -= Time.deltaTime;
-        if(this.nextSpawnTime <= 0)
-        {
-            RemoveNPC();
-            this.SetTimer();
-        }    
-    }
+//    public void CheckTimer()
+//    {
+//        this.nextSpawnTime -= Time.deltaTime;
+//        if(this.nextSpawnTime <= 0)
+//        {
+//            RemoveNPC();
+//            this.SetTimer();
+//        }    
+//    }
 }
